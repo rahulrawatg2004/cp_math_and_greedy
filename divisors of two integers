@@ -1,0 +1,49 @@
+https://codeforces.com/problemset/problem/1108/B
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        Arrays.sort(arr);
+
+        int x = arr[n - 1];  // largest element
+
+        // Count frequency of each number
+        Map<Integer, Integer> freq = new HashMap<>();
+        for (int num : arr) {
+            freq.put(num, freq.getOrDefault(num, 0) + 1);
+        }
+
+        // Find all divisors of x and remove one occurrence
+        for (int i = 1; i * i <= x; i++) {
+            if (x % i == 0) {
+                // Remove divisor i
+                freq.put(i, freq.get(i) - 1);
+
+                // Remove paired divisor if different
+                if (i != x / i) {
+                    freq.put(x / i, freq.get(x / i) - 1);
+                }
+            }
+        }
+
+        // Find largest remaining number
+        int y = 1;
+        for (int num : freq.keySet()) {
+            if (freq.get(num) > 0) {
+                y = Math.max(y, num);
+            }
+        }
+
+        System.out.println(x + " " + y);
+    }
+}
