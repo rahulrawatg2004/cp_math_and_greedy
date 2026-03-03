@@ -1,0 +1,37 @@
+https://codeforces.com/problemset/problem/1324/C
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        
+        while (t-- > 0) {
+            String s = sc.next();
+            
+            int maxGap = 0;
+            int currentGap = 0;
+            
+            // Add virtual 'R' at the beginning
+            currentGap = 0;
+            
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) == 'L') {
+                    currentGap++;
+                } else { // 'R'
+                    maxGap = Math.max(maxGap, currentGap);
+                    currentGap = 0;
+                }
+            }
+            
+            // Check last segment of L's
+            maxGap = Math.max(maxGap, currentGap);
+            
+            // Answer is max consecutive L + 1
+            System.out.println(maxGap + 1);
+        }
+        
+        sc.close();
+    }
+}
