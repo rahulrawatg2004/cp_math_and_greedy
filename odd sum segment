@@ -1,0 +1,46 @@
+https://codeforces.com/problemset/problem/1196/B
+
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder out = new StringBuilder();
+
+        int q = Integer.parseInt(br.readLine());
+
+        while (q-- > 0) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int n = Integer.parseInt(st.nextToken());
+            int k = Integer.parseInt(st.nextToken());
+
+            st = new StringTokenizer(br.readLine());
+
+            List<Integer> oddPos = new ArrayList<>();
+
+            for (int i = 1; i <= n; i++) {
+                int x = Integer.parseInt(st.nextToken());
+                if (x % 2 == 1) {
+                    oddPos.add(i);
+                }
+            }
+
+            int oddCount = oddPos.size();
+
+            if (oddCount < k || (oddCount - k) % 2 != 0) {
+                out.append("NO\n");
+            } else {
+                out.append("YES\n");
+
+                for (int i = 0; i < k - 1; i++) {
+                    out.append(oddPos.get(i)).append(" ");
+                }
+
+                out.append(n).append("\n");
+            }
+        }
+
+        System.out.print(out);
+    }
+}
