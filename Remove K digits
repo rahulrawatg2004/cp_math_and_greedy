@@ -1,0 +1,40 @@
+https://leetcode.com/problems/remove-k-digits/description/
+
+class Solution {
+    public String removeKdigits(String num, int k) {
+        Stack<Integer> st = new Stack<>();
+
+        st.push(num.charAt(0) - '0');
+
+        for (int i = 1; i < num.length(); i++) {
+            int digit = num.charAt(i) - '0';
+
+            while (!st.isEmpty() && k > 0 && st.peek() > digit) {
+                st.pop();
+                k--;
+            }
+            st.push(digit);
+        }
+
+        // remove remaining k digits
+        while (k > 0 && !st.isEmpty()) {
+            st.pop();
+            k--;
+        }
+
+        // build string
+        StringBuilder sb = new StringBuilder();
+        while (!st.isEmpty()) {
+            sb.append(st.pop());
+        }
+
+        sb.reverse();
+
+        // remove leading zeros
+        while (sb.length() > 0 && sb.charAt(0) == '0') {
+            sb.deleteCharAt(0);
+        }
+
+        return sb.length() == 0 ? "0" : sb.toString();
+    }
+}
