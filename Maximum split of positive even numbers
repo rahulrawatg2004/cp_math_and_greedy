@@ -1,0 +1,23 @@
+class Solution {
+    public List<Long> maximumEvenSplit(long finalSum) {
+        List<Long> ans = new ArrayList<>();
+
+        if (finalSum % 2 != 0) return ans;
+
+        long num = 2;
+
+        while (finalSum >= num) {
+            ans.add(num);
+            finalSum -= num;
+            num += 2;
+        }
+
+        // leftover adjust
+        if (!ans.isEmpty()) {
+            int lastIndex = ans.size() - 1;
+            ans.set(lastIndex, ans.get(lastIndex) + finalSum);
+        }
+
+        return ans;
+    }
+}
