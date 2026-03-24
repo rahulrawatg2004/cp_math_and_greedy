@@ -1,0 +1,43 @@
+import java.util.*;
+
+public class Main {
+    
+    static int solve(String s, char a, char b) {
+        int n = s.length();
+        int count = 0;
+        
+        // find b from right
+        int i = n - 1;
+        while (i >= 0 && s.charAt(i) != b) {
+            i--;
+            count++;
+        }
+        
+        // find a before b
+        int j = i - 1;
+        while (j >= 0 && s.charAt(j) != a) {
+            j--;
+            count++;
+        }
+        
+        return count;
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        
+        while (t-- > 0) {
+            String s = sc.next();
+            
+            int ans = Integer.MAX_VALUE;
+            
+            ans = Math.min(ans, solve(s, '0', '0'));
+            ans = Math.min(ans, solve(s, '2', '5'));
+            ans = Math.min(ans, solve(s, '5', '0'));
+            ans = Math.min(ans, solve(s, '7', '5'));
+            
+            System.out.println(ans);
+        }
+    }
+}
