@@ -1,0 +1,52 @@
+
+
+https://codeforces.com/problemset/problem/1433/D
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+
+        while (t-- > 0) {
+            int n = sc.nextInt();
+            int[] a = new int[n];
+
+            for (int i = 0; i < n; i++) {
+                a[i] = sc.nextInt();
+            }
+
+            int diff = -1;
+
+            // Find first index with different gang
+            for (int i = 1; i < n; i++) {
+                if (a[i] != a[0]) {
+                    diff = i;
+                    break;
+                }
+            }
+
+            if (diff == -1) {
+                System.out.println("NO");
+                continue;
+            }
+
+            System.out.println("YES");
+
+            // Connect different gang nodes with root (1)
+            for (int i = 1; i < n; i++) {
+                if (a[i] != a[0]) {
+                    System.out.println(1 + " " + (i + 1));
+                }
+            }
+
+            // Connect same gang nodes with diff
+            for (int i = 1; i < n; i++) {
+                if (a[i] == a[0]) {
+                    System.out.println((diff + 1) + " " + (i + 1));
+                }
+            }
+        }
+    }
+}
